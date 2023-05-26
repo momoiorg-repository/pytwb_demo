@@ -1,0 +1,9 @@
+<!-- Behavior tree that looks for objects by using a queue of locations. -->
+<!--All moves use GoToPose. -->
+<root BTCPP_format="4">
+    <BehaviorTree ID="MainTree">
+    <Sequence name="main_loop" memory="false">
+        <Viewer name="viewer" mode="check"/>
+    </Sequence>
+    </BehaviorTree>
+</root>

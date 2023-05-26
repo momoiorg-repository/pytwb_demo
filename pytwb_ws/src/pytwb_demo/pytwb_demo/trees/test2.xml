@@ -1,0 +1,24 @@
+<root>
+    <BehaviorTree ID="MainTree">
+    <Sequence name="main_loop" memory="[False]">
+
+        <Commander name="commander"/>
+        <SetLocations                   name="set_locations" location_file="/target/sim_house_locations.yaml"/>
+            <Retry  name="find_loop" num_failures="[10]">
+            <Sequence name="seek_target" memory="[True]">
+                <Parallel name="seek_and_go" policy="SuccessOnOne">
+                    <LookForCoke name="look_coke"/>
+                    <Sequence                   name="search_location" memory="false"> <!--sub tasks-->
+                        <GetLocation      name="get_loc"      location_file="/target/sim_house_locations.yaml"/>   
+                        <GoToPose               name="go_to_loc"    pose="dummy"/>
+                        <!--<LookAround> when robot arrive to the point, change theta-->
+                    </Sequence>
+                </Parallel>
+                <SetWatchLocations name="set_location" />
+
+            </Sequence>
+            </Retry>
+        
+    </Sequence>
+    </BehaviorTree>
+</root>

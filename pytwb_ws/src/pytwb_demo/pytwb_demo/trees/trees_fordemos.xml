@@ -1,0 +1,37 @@
+<!-- Behavior tree that looks for objects by using a queue of locations. -->
+<!--All moves use GoToPose. -->
+<root BTCPP_format="4">
+    <BehaviorTree ID="MainTree">
+    <Sequence name="main_loop">
+
+        <SetLocations/>
+        <Parallel>
+            <LookForObject/> <!--main task-->
+            <Sequence                   name="search_location" memory="false"> <!--sub tasks-->
+                <GetLocationFromQueue   name="get_loc"/>   
+                <GoToPose               name="go_to_loc"    pose="dummy"/>
+                <!--<LookAround> when robot arrive to the point, change theta-->
+            </Sequence>
+        </Parallel>
+
+        <GoToPose/>
+        <LookForObject/>
+
+        <PrepareGrip/> <!--Get the coordinate and so on from BB, Set the goal pose to BB-->
+
+    <!--
+        Arm behaviors
+        <Sequence> 
+        <Retry num_failures="[3]">  #3 times planning
+            <GripObject
+            <PullUpObject> #Up the Arm
+        </Retry>
+        </Sequence>
+    -->
+        <SetGoal/> <!--Set the goal location where is decided-->
+        <GoToPose/>
+        
+    </Sequence>
+
+    </BehaviorTree>
+</root>
