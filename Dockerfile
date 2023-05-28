@@ -13,3 +13,4 @@ RUN git clone https://github.com/RobotSpatialCognition/vector_map.git
 WORKDIR /usr/local/lib/vector_map
 RUN pip3 install -e .
 WORKDIR /root
+COPY ./pytwb_ws .
