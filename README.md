@@ -56,9 +56,13 @@ docker compose up world-demo
 
 Here, change the model of turtlebot3 that world-demo executes and enable the depth function of realsense camera.  
 
-CP
+open another bash terminal
+cd pytwb_demo  
+docker cp ./model.sdf turtlebot3_behavior_demo-world-demo-1:/turtlebot3_ws/src/turtlebot3_simulations/turtlebot3_gazebo/models/turtlebot3_waffle_pi  
+cd ..
 
-Restart docker in world-demo.  
+Restart docker of world-demo.
+cd turtlebot3_behavior_demo  
 docker stop turtlebot3_behavior_demo-world-demo-1  
 docker start turtlebot3_behavior_demo-world-demo-1  
 
