@@ -2,20 +2,23 @@
 The main purpose of the pytwb_demo is to provide a sample of a ROS application implemented using the functions of pytwb and vector_map libraries.
 
 - [pytwb](https://github.com/momoiorg-repository/pytwb):
-pytwb is a tool for Behavior Tree development and execution using Python. It has a function to execute Behavior Tree description by XML.
+pytwb is a tool for behavior tree development and execution based on py_trees and py_trees_ros. It also has a function to execute behavior tree written in XML.
 
 - [vector_map](https://github.com/RobotSpatialCognition/vector_map):
 It has a function to output a vector format map by converting SLAM map described in occupancy grid format into a representation consisting of geometric straight lines and curves. In addition, it has a function to represent a group of areas in the map, such as rooms and corridors, as Python objects, add property information to them, and save them.
 
-pytwb_demo implements an example of turtlebot3 searching for cola cans using the Realsense depth camera and a Behavior Tree in Python.
+pytwb_demo implements an example of turtlebot3 searching for cola cans using the Realsense depth camera and a behavior tree in Python+XML.
 
-The realization of the execution environment is fully dependent on the GitHub sea-bass' “turtlebot3_behavior_demos”. The simulation environment (demo-world) of the turtlebot3_behavior_demos by Gazebo and Rviz is used as it is. pytwb_demo also uses part of the Python implementation of its Behavior.
+The realization of the simulation environment is fully dependent on the GitHub sea-bass' “turtlebot3_behavior_demos” (https://github.com/sea-bass/turtlebot3_behavior_demos). The invocation mechanism and settiongs of simulation (demo-world) of the turtlebot3_behavior_demos by Gazebo and Rviz is used as it is. pytwb_demo also uses part of the Python implementation of its behavior.
 
-So installing pytwb_demo starts with installing turtlebot3_behavior_demos, because pytwb_demo contains only the execution environment of Behavior Tree, and does not contain the part that executes it using turtlebot3. 
-The demo as a whole corresponds to the pre-stage movement work to start a picking work. Inside a building with a complex shape, it automatically enumerates positions with good visibility, searches for cola cans using a camera while the robot moves to those points, and if it finds a cola can, it stops and looks again. A series of operations are implemented to confirm the position, measure the coordinates, calculate the position coordinates of the robot suitable for picking cola cans, and move to that point.
+The pytwb_demo implements a behavior tree based commanding mechanism to the simulated turtlebot3 provided by turtlebot3_behavior_demos. 
+
+So installing pytwb_demo starts with installing turtlebot3_behavior_demos, because pytwb_demo contains only the execution environment of behavior tree, and does not contain the part that executes it using turtlebot3. 
+
+The demo as a whole corresponds to the pre-stage movement task to start a picking task (even though simulated turtlebot3 dones not have arm...). Inside a building with a complex shape, it automatically enumerates positions with good visibility, searches for cola cans using a camera while the robot moves to those points, and if it finds a cola can, it stops and looks again. Succeeding operations are implemented to confirm the position, measure the coordinates, calculate the position coordinates of the robot suitable for picking cola cans, and move to that point.
 
 Here, by using pytwb and vector_map,
-- Developing behavior tree applications in incremental way,
+- Developing ROS behavior tree applications in incremental way,
 - Analyze the SLAM map and choose a good vantage point,
 - Locating objects on the move and calculating their coordinates,
 - Calculate the coordinates of the work place of a picking robot relative to the object without interfering with the surroundings,
@@ -23,18 +26,17 @@ Here, by using pytwb and vector_map,
 etc. are realized.
 
 # Installation
-First, install sea-bass' turtlebot3_behavior_demos. A run of Gazebo and Rviz is provided in "turtlebot3_behavior_demos". Detail is,  
-https://github.com/sea-bass/turtlebot3_behavior_demos  
-See in fact,
+First, install sea-bass' turtlebot3_behavior_demos. A run of Gazebo and Rviz is provided in "turtlebot3_behavior_demos". 
 
 git clone https://github.com/sea-bass/turtlebot3_behavior_demos.git  
 cd turtlebot3_behavior_demos  
 docker compose build  
 cd ..  
 
-to run.  
+Please refer to the following for details.  
+https://github.com/sea-bass/turtlebot3_behavior_demos  
 
-Next, build pytwb_demo. As a prerequisite, a docker image of pytwb is required. So, first, do the following:  
+Next, build pytwb_demo. As a prerequisite, the docker image of pytwb is required. So, first, do the following:  
 
 git clone https://github.com/momoiorg-repository/pytwb.git  
 cd pytwb  
@@ -59,16 +61,17 @@ CP
 Restart docker in world-demo.  
 docker stop turtlebot3_behavior_demo-world-demo-1  
 docker start turtlebot3_behavior_demo-world-demo-1  
-The screens of Gazebo and Rviz are displayed, so place the Coke Can anywhere in the room from the Insert tab of Gazebo. It doesn't matter if you put more than one.
+
+The screens of Gazebo and Rviz are displayed, so place the coke can anywhere in the house from the "Insert" tab of Gazebo. It doesn't matter if you put more than one.
 
 Then run pytwb_demo docker  
 
-git run –name <docker name> -it pytwb_demo  
+docker run –name \<docker name\> -it pytwb_demo  
 
-In VSCode, attach to <docker name> and set the work directory to /root/pytwb_ws.  
+In VSCode, attach to \<docker name\> and set the work directory to /root/pytwb_ws.  
 Execute ./src/pytwb_demo/pytwb_demo/dbg_main.py from VSCode.
 
-　The ``>'' prompt is displayed in Terminal of VSCode, so execute the following  
-> run sim
+The "> " prompt is displayed in Terminal window of VSCode, so execute the following  
+\> run sim
 
 The simulation will now begin. The robot begins searching, finds a coke can in the process, calculates coordinates, and moves closer to it. Also, a vectorized map and moving camera images will be displayed.
