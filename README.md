@@ -63,8 +63,8 @@ cd ..
 
 Restart docker of world-demo.
 cd turtlebot3_behavior_demo  
-docker stop turtlebot3_behavior_demo-world-demo-1  
-docker start turtlebot3_behavior_demo-world-demo-1  
+docker restart turtlebot3_behavior_demo-world-demo-1  
+(change docker name based on your execution environment.)
 
 The screens of Gazebo and Rviz are displayed, so place the coke can anywhere in the house from the "Insert" tab of Gazebo. It doesn't matter if you put more than one.
 
