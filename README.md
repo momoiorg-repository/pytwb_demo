@@ -52,17 +52,16 @@ cd ..
 
 Now that it's ready to run, run two dockers.  
 cd turtlebot3_behavior_demos  
-docker compose up world-demo  
+docker compose up demo-world  
 
-Here, change the model of turtlebot3 that world-demo executes and enable the depth function of realsense camera.  
+Here, change the model of turtlebot3 that demo-world executes and enable the depth function of realsense camera.  
 
-open another bash terminal
+open another bash terminal  
 cd pytwb_demo  
 docker cp ./model.sdf turtlebot3_behavior_demos-demo-world-1:/turtlebot3_ws/src/turtlebot3_simulations/turtlebot3_gazebo/models/turtlebot3_waffle_pi  
 cd ..
 
-Restart docker of world-demo.
-cd turtlebot3_behavior_demo  
+Restart docker of world-demo.  
 docker restart turtlebot3_behavior_demos-demo-world-1  
 (change docker name based on your execution environment.)
 
@@ -72,7 +71,7 @@ Then run pytwb_demo docker
 
 docker run –name \<docker name\> -it pytwb_demo  
 
-In VSCode, attach to \<docker name\> and set the work directory to /root/pytwb_ws.  
+In VSCode, attach to \<docker name\> and set the work directory to /root.  
 Execute ./src/pytwb_demo/pytwb_demo/dbg_main.py from VSCode.
 
 The "> " prompt is displayed in Terminal window of VSCode, so execute the following  
