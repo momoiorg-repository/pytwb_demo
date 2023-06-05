@@ -69,7 +69,7 @@ The screens of Gazebo and Rviz are displayed, so place the coke can anywhere in 
 
 Then run pytwb_demo docker  
 
-docker run –name \<docker name\> -it pytwb_demo  
+docker run -–name \<docker name\> --network host -it pytwb_demo  
 
 In VSCode, attach to \<docker name\> and set the work directory to /root.  
 Execute ./src/pytwb_demo/pytwb_demo/dbg_main.py from VSCode.
