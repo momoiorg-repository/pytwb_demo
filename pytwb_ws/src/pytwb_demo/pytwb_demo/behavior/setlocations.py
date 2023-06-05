@@ -14,8 +14,9 @@ class SetLocations(py_trees.behaviour.Behaviour):
         r = world.get_root_region()
         self.region = r
         pose_list = []
-        for p in r.subregion_centers:
-            pose_list.append([p[0], p[1], 0])
+        for sr in r.get_subregions():
+            c = sr.get_weight_center()
+            pose_list.append([float(c.x), float(c.y), 0])
         bb.set("pose_list", pose_list)
 
     def update(self):

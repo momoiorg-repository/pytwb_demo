@@ -51,19 +51,19 @@ docker image build -t pytwb_demo:latest .
 cd ..  
 
 Now that it's ready to run, run two dockers.  
-cd turtlebot3_behavior_demo  
+cd turtlebot3_behavior_demos  
 docker compose up world-demo  
 
 Here, change the model of turtlebot3 that world-demo executes and enable the depth function of realsense camera.  
 
 open another bash terminal
 cd pytwb_demo  
-docker cp ./model.sdf turtlebot3_behavior_demo-world-demo-1:/turtlebot3_ws/src/turtlebot3_simulations/turtlebot3_gazebo/models/turtlebot3_waffle_pi  
+docker cp ./model.sdf turtlebot3_behavior_demos-demo-world-1:/turtlebot3_ws/src/turtlebot3_simulations/turtlebot3_gazebo/models/turtlebot3_waffle_pi  
 cd ..
 
 Restart docker of world-demo.
 cd turtlebot3_behavior_demo  
-docker restart turtlebot3_behavior_demo-world-demo-1  
+docker restart turtlebot3_behavior_demos-demo-world-1  
 (change docker name based on your execution environment.)
 
 The screens of Gazebo and Rviz are displayed, so place the coke can anywhere in the house from the "Insert" tab of Gazebo. It doesn't matter if you put more than one.

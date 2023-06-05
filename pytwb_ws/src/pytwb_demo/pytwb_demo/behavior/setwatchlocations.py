@@ -19,8 +19,9 @@ class SetWatchLocations(py_trees.behaviour.Behaviour):
         r = world.get_regions()[0]
         self.region = r
         pose_list = []
-        for p in r.subregion_centers:
-            pose_list.append([p[0], p[1], 0])
+        for sr in r.get_subregions():
+            c = sr.get_weight_center()
+            pose_list.append([c.x, c.y, 0])
         bb.set("watch_list", pose_list)
     
     def initialise(self) -> None:

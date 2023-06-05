@@ -11,7 +11,7 @@ def get_approach_pose(region, point, current):
     i_y = 0.0
     if near_boundaries:
         for b in near_boundaries:
-            for ip in b.segment.intersect(Circle(point, 1)):
+            for ip in b[1].segment.intersect(Circle(point, 1)):
                 i_x += ip.x
                 i_y += ip.y
                 points += 1

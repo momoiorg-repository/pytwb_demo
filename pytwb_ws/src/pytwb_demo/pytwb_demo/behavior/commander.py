@@ -6,7 +6,7 @@ class Messenger:
     def __init__(self) -> None:
         self.bb = py_trees.blackboard.Blackboard()
         self.bb.set("commander", self)
-        world = get_map_ROS('./pytwb_demo/pytwb_demo/resource/map')
+        world = get_map_ROS('./src/pytwb_demo/pytwb_demo/resource/map')
         self.world = world
         r = world.get_root_region()
         ss = SimulationSpace(r)
