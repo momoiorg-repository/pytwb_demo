@@ -10,6 +10,7 @@ class Messenger:
         self.world = world
         r = world.get_root_region()
         ss = SimulationSpace(r)
+        ss.show_outer_boundary()
         r.ss = ss
         self.ss = ss
         self.bb.set("geometric_map", world)
