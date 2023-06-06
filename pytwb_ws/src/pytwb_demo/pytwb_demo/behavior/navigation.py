@@ -7,10 +7,13 @@ from nav2_msgs.action import NavigateToPose
 
 from pytwb.common import behavior
 
+#
+## behaviors in this file is originated by "turtlebot3_behavior_demo"
+#
 @behavior
 class GetLocation(py_trees.behaviour.Behaviour):
     """ Gets a location name from the queue """
-    def __init__(self, name, location_file):
+    def __init__(self, name):
         super(GetLocation, self).__init__(name)
         self.bb = py_trees.blackboard.Blackboard()
 
@@ -33,7 +36,10 @@ class GetLocation(py_trees.behaviour.Behaviour):
     def terminate(self, new_status):
         self.logger.info(f"Terminated with status {new_status}")
 
-
+#
+## worker for navigation
+## the independent object is allocated to cope with repeated invocation and interruption of GoToPose
+#
 class MoveWorker:
     instance = None
     busy = False
@@ -95,7 +101,7 @@ class MoveWorker:
 
 @behavior
 class GoToPose(py_trees.behaviour.Behaviour):
-    def __init__(self, name, pose, node):
+    def __init__(self, name, node):
         super(GoToPose, self).__init__(name)
         self.node = node
         self.bb = py_trees.blackboard.Blackboard()
@@ -123,7 +129,6 @@ class GoToPose(py_trees.behaviour.Behaviour):
             if goal_status == GoalStatus.STATUS_SUCCEEDED:
                 return py_trees.common.Status.SUCCESS
             else:
-#                return py_trees.common.Status.FAILURE
                 return py_trees.common.Status.RUNNING
         return py_trees.common.Status.RUNNING
 

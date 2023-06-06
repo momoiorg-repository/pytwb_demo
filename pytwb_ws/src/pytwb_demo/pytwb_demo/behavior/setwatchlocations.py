@@ -6,6 +6,10 @@ from pytwb.common import behavior
 
 from lib.geolib import get_pose, get_approach_pose
 
+#
+## schedule robot pose when a target object(coke) is found by using vector map
+#
+# location list for error recovery
 @behavior
 class SetWatchLocations(py_trees.behaviour.Behaviour):
     """ Gets a location name from the queue """
@@ -62,6 +66,8 @@ class SetWatchLocations(py_trees.behaviour.Behaviour):
     def terminate(self, new_status):
         self.logger.info(f"Terminated with status {new_status}")
 
+## decide location to visit for recovery when watching fails
+## derived from "turtlebot3_behavior_demo"
 @behavior
 class GetWatchLocation(py_trees.behaviour.Behaviour):
     """ Gets a location name from the queue """
@@ -127,8 +133,8 @@ class ScheduleDestination(py_trees.behaviour.Behaviour):
         world = self.bb.get("geometric_map")
         region = world.get_regions()[0]
         pose = get_approach_pose(region, dest, dest.location)
-        dp = Point(dest.x, dest.y)
-        pp = Point(pose[0], pose[1])
+#        dp = Point(dest.x, dest.y)
+#        pp = Point(pose[0], pose[1])
 #        print(f'final target _x:{dest.last_point._x},_y:{dest.last_point._y},dist:{float(dp.distance(pp))}')
         self.bb.set('target_pose', pose)
         self.logger.info(f'selected target [x: {dest.x}, y: {dest.y}]')

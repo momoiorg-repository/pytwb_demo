@@ -10,6 +10,9 @@ from pytwb.common import behavior
 from lib.pointlib import TransformHelper, PointEx, PointBag
 from lib.simlib import point_coordinate, find_coke
 
+#
+## camera driver
+#
 class TargetSeeker:
     instance = None
     instance_is_free = False
@@ -76,10 +79,9 @@ class TargetSeeker:
         radius = 20
         cv2.circle(self.cv_image, center, radius, color)
         cv2.imshow('camera', self.cv_image)
-#        cv2.waitKey(0)
         x = depth_image.shape[1] / 2 - x # horizontal axis
         y -= depth_image.shape[0] / 2 # virtical axis
-        loc = point_coordinate(x, distance) # convert pic cell unit into local coordinate
+        loc = point_coordinate(x, distance) # convert pic cell unit into local coordinate (base_link)
         point = PointEx(loc)
         point.v_x = x
         point.distance = distance

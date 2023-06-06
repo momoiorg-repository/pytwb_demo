@@ -1,6 +1,9 @@
 import py_trees
 from pytwb.common import behavior
 
+# behavior for debugging
+
+# force repeat
 @behavior
 class DebugSuccess(py_trees.behaviour.Behaviour):
     def __init__(self, name, message=None, loop=1):
