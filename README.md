@@ -9,7 +9,7 @@ It has a function to output a vector format map by converting SLAM map described
 
 pytwb_demo implements an example of turtlebot3 searching for cola cans using the Realsense depth camera and a behavior tree in Python+XML.
 
-The realization of the simulation environment is fully dependent on the GitHub sea-bass' “turtlebot3_behavior_demos” (https://github.com/sea-bass/turtlebot3_behavior_demos). The invocation mechanism and settiongs of simulation (demo-world) of the turtlebot3_behavior_demos by Gazebo and Rviz is used as it is. pytwb_demo also uses part of the Python implementation of its behavior.
+The realization of the simulation environment is fully dependent on the GitHub sea-bass' [“turtlebot3_behavior_demos”](https://github.com/sea-bass/turtlebot3_behavior_demos). The invocation mechanism and settiongs of simulation (demo-world) of the turtlebot3_behavior_demos by Gazebo and Rviz is used as it is. pytwb_demo also uses part of the Python implementation of its behavior.
 
 The pytwb_demo implements a behavior tree based commanding mechanism to the simulated turtlebot3 provided by turtlebot3_behavior_demos. 
 
@@ -89,7 +89,13 @@ The simulation will now begin. The robot begins searching, finds a coke can in t
 
 ![displayed vector map](resource/map.jpg)
 
+# Dependencies
+- [“turtlebot3_behavior_demos”](https://github.com/sea-bass/turtlebot3_behavior_demos) by sea-bass  
+simulation environment of turtlebot3 using docker and basis of behavior tree implementation
+- [lecture page of OpenCV and Python](https://demura.net/education/22777.html) by Demura Kiminari  
+detection code of coke can image by OpenCV
+
 # Documents
 - [pytwb_demo Code Explanation](doc/pytwb_ws.md)
-- [pytwb documentation](https://github.com/momoiorg-repository/pytwb/tree/main/doc/overview.md)
+- [pytwb documentation](https://github.com/momoiorg-repository/pytwb/tree/main/doc/overview.md) 
 - [vector_map api](https://github.com/RobotSpatialCognition/vector_map/blob/main/doc/overview.md)
