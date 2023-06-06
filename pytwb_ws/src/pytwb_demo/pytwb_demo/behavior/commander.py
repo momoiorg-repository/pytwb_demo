@@ -2,14 +2,16 @@ import py_trees
 from pytwb.common import behavior
 from vector_map import get_map_ROS, SimulationSpace
 
+# keep track of robot status
+# by creating vector map and receiving reports from other behaviors
 class Messenger:
-    def __init__(self) -> None:
+    def __init__(self, map_file) -> None:
         self.bb = py_trees.blackboard.Blackboard()
         self.bb.set("commander", self)
-        world = get_map_ROS('./src/pytwb_demo/pytwb_demo/resource/map')
+        world = get_map_ROS(map_file) # read map and create vector map
         self.world = world
         r = world.get_root_region()
-        ss = SimulationSpace(r)
+        ss = SimulationSpace(r) # show map display
         ss.show_outer_boundary()
         r.ss = ss
         self.ss = ss
@@ -19,7 +21,8 @@ class Messenger:
             "schedule_final_target": self.handle_sched
         }
         self.state = 'preparing'
-        
+
+    # receive status reports from other behaviors    
     def report(self, name, *arg):
         driver = self.dispatcher.get(name)
         if driver: driver(name, arg)
@@ -42,9 +45,9 @@ class Messenger:
 @behavior
 class Commander(py_trees.behaviour.Behaviour):
     """ Gets a location name from the queue """
-    def __init__(self, name):
+    def __init__(self, name, map_file):
         super(Commander, self).__init__(name)
-        Messenger()
+        Messenger(map_file)
         
     def update(self):
         return py_trees.common.Status.SUCCESS

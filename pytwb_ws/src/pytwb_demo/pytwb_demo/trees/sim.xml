@@ -1,22 +1,21 @@
 <root>
     <BehaviorTree ID="MainTree">
     <Sequence name="main_loop" memory="[True]">
-        <Commander name="commander"/>
-        <SetLocations                   name="set_locations" location_file="/target/sim_house_locations.yaml"/>
+        <Commander name="commander" map_file="./src/pytwb_demo/pytwb_demo/resource/map"/>
+        <SetLocations name="set_locations"/>
             <Retry  name="find_loop" num_failures="[10]">
             <Sequence name="seek_target" memory="[True]">
                 <Parallel name="seek_and_go" policy="SuccessOnOne">
                     <LookForCoke name="look_coke"/>
-                    <Sequence                   name="search_location" memory="false"> <!--sub tasks-->
-                        <GetLocation      name="get_loc"      location_file="/target/sim_house_locations.yaml"/>   
-                        <GoToPose               name="go_to_loc"    pose="dummy"/>
-                        <!--<LookAround> when robot arrive to the point, change theta-->
+                    <Sequence name="search_location" memory="[True]">
+                        <GetLocation name="get_loc"/>   
+                        <GoToPose name="go_to_loc"/>
                     </Sequence>
                 </Parallel>
                 <SetWatchLocations name="set_location" />
                 <Selector name="check_target" memory="[True]">
                     <Sequence name="check_main" memory="[True]">
-                        <GoToPose name="revisit_coke"    pose="dummy"/>
+                        <GoToPose name="revisit_coke"/>
                         <Watch name="watch_coke"/>
                     </Sequence>
                     <Retry  name="watch_retry_loop" num_failures="[3]">
@@ -24,18 +23,18 @@
                             <GetWatchLocation name="watch_location"/>
                             <Parallel name="watch_retry_scan" policy="SuccessOnOne">
                                 <SuccessIsFailure name="watch_inverter">
-                                    <GoToPose name="watch_retry_migration"    pose="dummy"/>
+                                    <GoToPose name="watch_retry_migration"/>
                                 </SuccessIsFailure>
                                 <LookForCoke name="look_coke_retry"/>
                             </Parallel>
                             <GetGlancedLocation name="watch_new"/>
-                            <GoToPose name="target_approach_retry"    pose="dummy"/>
+                            <GoToPose name="target_approach_retry"/>
                             <Watch name="watch_coke_retry"/>
                         </Sequence>
                     </Retry>
                 </Selector>
                 <ScheduleDestination name="schedule_final_target"/>
-                <GoToPose name="reach"    pose="dummy"/>
+                <GoToPose name="reach"/>
                 <Viewer name="final_view" mode="one_shot" />
             </Sequence>
             </Retry> 

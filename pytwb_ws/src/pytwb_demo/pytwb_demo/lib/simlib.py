@@ -2,6 +2,7 @@ import cv2
 import numpy as np
 import math
 
+## convert point in camera image into local coordinate (base_link)
 def point_coordinate(x, l):
   alpha = x * 0.0025
 #  alpha = x * 0.00195
@@ -11,6 +12,11 @@ def point_coordinate(x, l):
   y = x * alpha
   return x, y
 
+#
+## find_coke is derived from
+##  lecture page https://demura.net/education/22777.html
+##  by Kosei Demura
+#
 def find_coke(image):
   # RGB表色系からHSV表色系に変換
   hsv_image = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
