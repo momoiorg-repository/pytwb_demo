@@ -71,8 +71,6 @@ The screens of Gazebo and Rviz are displayed, so place the coke can anywhere in 
 
  It doesn't matter if you put more than one.
 
-
-
 Then run pytwb_demo docker  
 
 docker run -–name \<docker name\> --network host -it pytwb_demo  
@@ -83,7 +81,13 @@ Execute ./src/pytwb_demo/pytwb_demo/dbg_main.py from VSCode.
 The "> " prompt is displayed in Terminal window of VSCode, so execute the following  
 \> run sim
 
-The simulation will now begin. The robot begins searching, finds a coke can in the process, calculates coordinates, and moves closer to it. Also, a vectorized map and moving camera images will be displayed.
+The simulation will now begin. The robot begins searching, finds a coke can in the process, calculates coordinates, and moves closer to it.  It terminates with displaying "mission complete".
+
+![execution of behavior tree](resource/prog.jpg)
+
+ Also, a vectorized map and moving camera images will be displayed.
+
+![displayed vector map](resource/map.jpg)
 
 # Documents
 - [pytwb_demo Code Explanation](doc/pytwb_ws.md)
