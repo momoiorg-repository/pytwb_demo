@@ -67,7 +67,7 @@ docker restart turtlebot3_behavior_demos-demo-world-1
 
 The screens of Gazebo and Rviz are displayed, so place the coke can anywhere in the house from the "Insert" tab of Gazebo.  Pull down "http://models.gazebosim.org/" tab of Insert and pick up and place "coke can".
 
-![coke can pick and place](./resource/coke.jpg)
+![coke can pick and place](resource/coke.jpg)
 
  It doesn't matter if you put more than one.
 
