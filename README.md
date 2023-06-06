@@ -95,7 +95,8 @@ simulation environment of turtlebot3 using docker and basis of behavior tree imp
 - [lecture page of OpenCV and Python](https://demura.net/education/22777.html) by Demura Kiminari  
 detection code of coke can image by OpenCV
 
-# Documents
+# Documents  
+Special thanks to the following works.  
 - [pytwb_demo Code Explanation](doc/pytwb_ws.md)
 - [pytwb documentation](https://github.com/momoiorg-repository/pytwb/tree/main/doc/overview.md) 
 - [vector_map api](https://github.com/RobotSpatialCognition/vector_map/blob/main/doc/overview.md)
