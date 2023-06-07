@@ -19,7 +19,7 @@ In this xml code, the following behaviors are executed in order within the Seque
 </root>  
 ```
 
-1. Commander: Create a vector map from the given SLAM map and save it in the black board's “geometric_map” tag. Also, create a Messenger object and store it in the “commander” tag as well. The Messenger object has the function of receiving reports from other behaviors and grasping the current state of the robot.
+1. Commander: Create a [vector map](https://github.com/RobotSpatialCognition/vector_map) from the given SLAM map and save it in the black board's “geometric_map” tag. Also, create a Messenger object and store it in the “commander” tag as well. The Messenger object has the function of receiving reports from other behaviors and grasping the current state of the robot.
 2. SetLocation: From the vector map created above, calculate the coordinates of the candidate points to be traversed to find the coke cans. The candidate points are constructed by the center coordinates of large areas of line-of-sight separated by narrow points within the building. Save the list of candidate points in the “set_list” tag of the black board.
 3. Body code surrounded by Retry: Executes multiple behaviors required to move while looking for coke cans with camera.
 
@@ -41,4 +41,4 @@ Watch also accumulates the locations of the detected coke cans in a PointBag obj
 The Viewer is a simple camera image display behavior that receives and displays images regardless of the presence of a cola can.
 
 ## Details of ScheduleDestination(behavior/setwatchlocations.py)
-ScheduleDestination calculates the final posture that the robot should reach based on the coke can coordinates detected by the Watch and the vector map. The body of the computation is done by get_approach_pose(lib/geolib.py). First, it calculates the distance for walls within 0.5m. The farthest direction from these walls is calculated, and from there the desired pose of the robot is calculated so as to bring the robot closer to the object for picking action. These calculations can be easily done with the function of the vector map.
+ScheduleDestination calculates the final posture that the robot should reach based on the coke can coordinates detected by the Watch behavior and the vector map. The body of the computation is done by get_approach_pose(lib/geolib.py). First, it calculates the distance for walls within 0.5m. The farthest direction from these walls is calculated, and from there the desired pose of the robot is calculated so as to bring the robot closer to the object for picking action. These calculations can be easily done with the function of the vector map.
