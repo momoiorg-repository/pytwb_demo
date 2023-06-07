@@ -1,12 +1,12 @@
 # pytwb_demo Code Explanation
 
 ## Overview
-The code in pytwb_demo is organized around Python and XML under behavior, trees, lib directories under pytwb_ws/src/pytwb_demo/pytwb_demo.
+The code in pytwb_demo is organized around Python and XML under behavior, trees, lib directories under src/pytwb_demo/pytwb_demo.
 First, let us try to grasp the overall structure by viewing trees/sim.xml. The skeletal structure of trees/sim.xml is as follows.
 In this xml code, the following behaviors are executed in order within the Sequence.
 
 ```
-<root\\\>  
+<root>  
      <BehaviorTree ID="MainTree">  
      <Sequence name="main_loop" memory="[True]">  
          <Commander name="commander"/>  

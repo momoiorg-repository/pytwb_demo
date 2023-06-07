@@ -62,7 +62,9 @@ class TargetSeeker:
     def depth_callback(self, data):
         if not self.found:
             if hasattr(self, 'cv_image'):
+#                cv2.destroyWindow('camera')
                 cv2.imshow('camera', self.cv_image)
+                cv2.waitKey(1)
             return
         self.found = False
         try:
@@ -78,7 +80,9 @@ class TargetSeeker:
         color  = (0, 255, 0)
         radius = 20
         cv2.circle(self.cv_image, center, radius, color)
+#        cv2.destroyWindow('camera')
         cv2.imshow('camera', self.cv_image)
+        cv2.waitKey(1)
         x = depth_image.shape[1] / 2 - x # horizontal axis
         y -= depth_image.shape[0] / 2 # virtical axis
         loc = point_coordinate(x, distance) # convert pic cell unit into local coordinate (base_link)
