@@ -25,14 +25,6 @@ class Messenger:
         self.bb.set("commander", self)
         self.world = None
         self.ss = None
-#        world = get_map_ROS(map_file) # read map and create vector map
-#        self.world = world
-#        r = world.get_root_region()
-#        ss = SimulationSpace(r) # show map display
-#        ss.show_outer_boundary()
-#        r.ss = ss
-#        self.ss = ss
-#        self.bb.set("geometric_map", world)
         self.dispatcher = {
             "get_loc": self.handle_get_loc,
             "schedule_final_target": self.handle_sched
@@ -42,11 +34,24 @@ class Messenger:
     def map_callback(self, data):
         width = data.info.width #map width, from nav_msgs/msg/MapMetaData
         height = data.info.height #map height, from nav_msgs/msg/MapMetaData
-        img_data = np.array(data.data).reshape(height, width)
+        map_array = np.array(data.data).reshape(height, width)
+
+        # make ndarray that has the same size as of map_array
+        pgm_array = np.zeros((height, width), dtype=np.uint8)
+        pgm_array[(map_array == -1) | (map_array >= 40)] = 0 # occupied(above 40) or undifined(-1)
+        pgm_array[(0 < map_array) & (map_array < 40)] = 255 # none(0 < n < 40)
         resolution = data.info.resolution
         o = data.info.origin.position
         origin = (o.x, o.y)
-        self.world = get_map(img_data, resolution, origin)
+        self.world = get_map(pgm_array, resolution, origin)
+
+    def set_ss(self):
+        r = self.world.get_root_region()
+        ss = SimulationSpace(r) # show map display
+        ss.show_outer_boundary()
+        r.ss = ss
+        self.ss = ss
+        self.bb.set("geometric_map", self.world)
 
     # receive status reports from other behaviors    
     def report(self, name, *arg):
@@ -79,11 +84,5 @@ class Commander(py_trees.behaviour.Behaviour):
         if not self.messenger.world:
             return py_trees.common.Status.RUNNING
         if not self.messenger.ss:
-            r = self.world.get_root_region()
-            ss = SimulationSpace(r) # show map display
-            ss.show_outer_boundary()
-            r.ss = ss
-            self.ss = ss
-            self.bb.set("geometric_map", self.world)
+            self.messenger.set_ss()
         return py_trees.common.Status.SUCCESS
-
