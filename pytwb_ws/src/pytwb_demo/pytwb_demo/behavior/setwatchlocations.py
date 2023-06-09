@@ -15,6 +15,9 @@ class SetWatchLocations(py_trees.behaviour.Behaviour):
     """ Gets a location name from the queue """
     def __init__(self, name, debug=False):
         super(SetWatchLocations, self).__init__(name)
+    
+    def initialise(self) -> None:
+        # initialize watch list
         bb = py_trees.blackboard.Blackboard()
         self.bb = bb
         self.debug = debug
@@ -27,8 +30,7 @@ class SetWatchLocations(py_trees.behaviour.Behaviour):
             c = sr.get_weight_center()
             pose_list.append([c.x, c.y, 0])
         bb.set("watch_list", pose_list)
-    
-    def initialise(self) -> None:
+
         # clear glanced_point
         self.target = None
         if not self.bb.exists("glanced_point"): return

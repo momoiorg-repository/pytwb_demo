@@ -10,6 +10,8 @@ class SetLocations(py_trees.behaviour.Behaviour):
     """ Gets a location name from the queue """
     def __init__(self, name):
         super(SetLocations, self).__init__(name)
+    
+    def initialise(self) -> None:
         bb = py_trees.blackboard.Blackboard()
         self.bb = bb
 
