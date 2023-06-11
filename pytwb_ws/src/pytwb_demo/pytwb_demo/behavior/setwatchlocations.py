@@ -15,12 +15,12 @@ class SetWatchLocations(py_trees.behaviour.Behaviour):
     """ Gets a location name from the queue """
     def __init__(self, name, debug=False):
         super(SetWatchLocations, self).__init__(name)
+        self.debug = debug
     
     def initialise(self) -> None:
         # initialize watch list
         bb = py_trees.blackboard.Blackboard()
         self.bb = bb
-        self.debug = debug
 
         world = bb.get('geometric_map')
         r = world.get_regions()[0]

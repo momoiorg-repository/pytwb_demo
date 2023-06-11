@@ -11,6 +11,7 @@ from vector_map import get_map, get_map_ROS, SimulationSpace
 # by creating vector map and receiving reports from other behaviors
 class Messenger:
     def __init__(self, map_file, node) -> None:
+        self.map_file = map_file
         qos_profile=QoSProfile(
             reliability=QoSReliabilityPolicy.RELIABLE,
             durability=QoSDurabilityPolicy.TRANSIENT_LOCAL,
@@ -35,15 +36,19 @@ class Messenger:
         width = data.info.width #map width, from nav_msgs/msg/MapMetaData
         height = data.info.height #map height, from nav_msgs/msg/MapMetaData
         map_array = np.array(data.data).reshape(height, width)
+        map_array = np.flipud(map_array)
 
         # make ndarray that has the same size as of map_array
         pgm_array = np.zeros((height, width), dtype=np.uint8)
-        pgm_array[(map_array == -1) | (map_array >= 40)] = 0 # occupied(above 40) or undifined(-1)
-        pgm_array[(0 < map_array) & (map_array < 40)] = 255 # none(0 < n < 40)
+        pgm_array[(map_array == -1)] = 254
+        pgm_array[(map_array < 90)] = 254 
+        pgm_array[(map_array >= 90)] = 0 
+
         resolution = data.info.resolution
         o = data.info.origin.position
         origin = (o.x, o.y)
         self.world = get_map(pgm_array, resolution, origin)
+#        self.world = get_map_ROS(self.map_file)
 
     def set_ss(self):
         r = self.world.get_root_region()
