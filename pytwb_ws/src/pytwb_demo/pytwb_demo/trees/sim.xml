@@ -1,7 +1,7 @@
 <root>
     <BehaviorTree ID="MainTree">
     <Sequence name="main_loop" memory="[True]">
-        <Commander name="commander" map_file="./src/pytwb_demo/pytwb_demo/resource/map"/>
+        <Commander name="commander"/>
         <SetLocations name="set_locations"/>
             <Retry  name="find_loop" num_failures="[10]">
             <Sequence name="seek_target" memory="[True]">

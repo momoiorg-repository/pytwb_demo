@@ -10,27 +10,31 @@ from vector_map import get_map, get_map_ROS, SimulationSpace
 # keep track of robot status
 # by creating vector map and receiving reports from other behaviors
 class Messenger:
-    def __init__(self, map_file, node) -> None:
+    def __init__(self, node, map_file) -> None:
         self.map_file = map_file
-        qos_profile=QoSProfile(
-            reliability=QoSReliabilityPolicy.RELIABLE,
-            durability=QoSDurabilityPolicy.TRANSIENT_LOCAL,
-            history=QoSHistoryPolicy.KEEP_LAST,
-            depth=1)
-        self.image_sub = node.create_subscription(
-            OccupancyGrid,
-            "/map",self.map_callback,
-            qos_profile)
+        self.ss = None
+        if map_file:
+            self.world = get_map_ROS(self.map_file)
+            self.state = 'ready'
+        else:
+            self.world = None
+            qos_profile=QoSProfile(
+                reliability=QoSReliabilityPolicy.RELIABLE,
+                durability=QoSDurabilityPolicy.TRANSIENT_LOCAL,
+                history=QoSHistoryPolicy.KEEP_LAST,
+                depth=1)
+            self.image_sub = node.create_subscription(
+                OccupancyGrid,
+                "/map",self.map_callback,
+                qos_profile)
+            self.state = 'preparing'
 
         self.bb = py_trees.blackboard.Blackboard()
         self.bb.set("commander", self)
-        self.world = None
-        self.ss = None
         self.dispatcher = {
             "get_loc": self.handle_get_loc,
             "schedule_final_target": self.handle_sched
         }
-        self.state = 'preparing'
     
     def map_callback(self, data):
         width = data.info.width #map width, from nav_msgs/msg/MapMetaData
@@ -48,7 +52,6 @@ class Messenger:
         o = data.info.origin.position
         origin = (o.x, o.y)
         self.world = get_map(pgm_array, resolution, origin)
-#        self.world = get_map_ROS(self.map_file)
 
     def set_ss(self):
         r = self.world.get_root_region()
@@ -81,9 +84,9 @@ class Messenger:
 @behavior
 class Commander(py_trees.behaviour.Behaviour):
     """ Gets a location name from the queue """
-    def __init__(self, name, map_file, node):
+    def __init__(self, name, node, map_file=None):
         super(Commander, self).__init__(name)
-        self.messenger = Messenger(map_file, node)
+        self.messenger = Messenger(node, map_file)
         
     def update(self):
         if not self.messenger.world:
