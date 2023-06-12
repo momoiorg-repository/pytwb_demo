@@ -81,15 +81,15 @@ Execute ./src/pytwb_demo/pytwb_demo/dbg_main.py from VSCode.
 The "> " prompt is displayed in Terminal window of VSCode, so execute the following  
 \> run sim
 
-The simulation will now begin. The robot begins searching, finds a coke can in the process, calculates coordinates, and moves closer to it.  It terminates with displaying "mission complete".
+The simulation will now begin.  
+[video demo](https://momoi.org/wp-content/uploads/2023/06/demo.mp4)  
+The robot begins searching, finds a coke can in the process, calculates coordinates, and moves closer to it.  It terminates with displaying "mission complete".
 
 ![execution of behavior tree](resource/prog.jpg)
 
  Also, a vectorized map and moving camera images will be displayed.
 
 ![displayed vector map](resource/map.jpg)
-
-[video demo]("https://momoi.org/wp-content/uploads/2023/06/demo.mp4")
 
 # Dependencies  
 Special thanks to the following works:  
