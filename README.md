@@ -89,10 +89,6 @@ The simulation will now begin. The robot begins searching, finds a coke can in t
 
 ![displayed vector map](resource/map.jpg)
 
-camera image
-
-<video class="video" src="resource/demo.mp4"></video>
-
 # Dependencies  
 Special thanks to the following works:  
 - [“turtlebot3_behavior_demos”](https://github.com/sea-bass/turtlebot3_behavior_demos) by sea-bass  
