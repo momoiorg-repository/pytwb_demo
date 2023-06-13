@@ -15,7 +15,7 @@ def point_coordinate(x, l):
 #
 ## find_coke is derived from
 ##  lecture page https://demura.net/education/22777.html
-##  by Kosei Demura
+##  by Demura Kosei
 #
 def find_coke(image):
   # RGB表色系からHSV表色系に変換

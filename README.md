@@ -95,7 +95,7 @@ The robot begins searching, finds a coke can in the process, calculates coordina
 Special thanks to the following works:  
 - [“turtlebot3_behavior_demos”](https://github.com/sea-bass/turtlebot3_behavior_demos) by sea-bass  
 simulation environment of turtlebot3 using docker and basis of behavior tree implementation
-- [lecture page of OpenCV and Python](https://demura.net/education/22777.html) by Demura Kiminari  
+- [lecture page of OpenCV and Python](https://demura.net/education/22777.html) by Demura Kosei  
 detection code of coke can image by OpenCV
 
 # Documents  
