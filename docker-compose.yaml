@@ -1,6 +1,6 @@
 services:
   pytwb:
-    image: pytwb-demo-image2
+    image: pytwb-demo-image
     build:
       context: .
       dockerfile: Dockerfile
