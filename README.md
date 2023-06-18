@@ -63,15 +63,14 @@ Then run pytwb_demo docker. All work is done within VSCode, and running pytwb_de
 
 (at "pytwb_demo" directory)  
 start VSCode by "code ."
-Select docker-compose.yaml
 Press “F1” after VSCode starts.  
  -> select “Dev Containers: Open Folder in Container” tab  
  -> select current directory as work directory  
  -> select “From ‘docker-compose.yaml’  
 The corresponding docker will be started and VSCode is attached automatically.  
-Set working directory of VSCode by its "Open Folder" menu to “/root/pytwb_wb”.  
+Set working directory of VSCode by its "Open Folder" menu to “/root/pytwb_wb” (1st time only. Automatically set after creating a package).  
+Install VSCode "Python in Dev Container" plugin(1st time only).  
 input “export DISPLAY= xxx.xxx.xxx.xxx:0.0” from the Terminal section of VSCode window.  
-Install VSCode "Python in Dev Container" plugin.  
 Select “main.py” and press F5.  
 The “> “ prompt will be displayed in the Terminal section.   This implies that the pytwb command session has been started successfully. 
 By inputting “create pytwb_demo” command, The “pytwb_demo” package will be created. 
