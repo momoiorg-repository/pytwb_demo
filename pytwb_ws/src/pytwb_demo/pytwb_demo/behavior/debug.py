@@ -1,11 +1,13 @@
 import py_trees
 from pytwb.common import behavior
 
-# behavior for debugging
+# behaviors for debugging
 
 # force repeat
 @behavior
 class DebugSuccess(py_trees.behaviour.Behaviour):
+    desc = 'force repeat for debugging'
+
     def __init__(self, name, message=None, loop=1):
         super(DebugSuccess, self).__init__(name)
         self.message = message
@@ -24,6 +26,8 @@ class DebugSuccess(py_trees.behaviour.Behaviour):
 # quoted from py_trees
 @behavior
 class PassThrough(py_trees.decorators.Decorator):
+    desc = 'just print result for debugging'
+
     """
     This decorator simply reflects the child's current status.
 

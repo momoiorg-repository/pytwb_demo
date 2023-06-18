@@ -132,6 +132,8 @@ class TargetSeeker:
 
 @behavior
 class Viewer(py_trees.behaviour.Behaviour):
+    desc = 'just camera snap shot'
+
     def __init__(self, name, node, mode="permanent"):
         super(Viewer, self).__init__(name)
         self.mode = mode
@@ -162,6 +164,8 @@ class Viewer(py_trees.behaviour.Behaviour):
 
 @behavior
 class LookForCoke(py_trees.behaviour.Behaviour):
+    desc = 'decide target location by a single glance'
+
     def __init__(self, name, node, debug=False):
         super(LookForCoke, self).__init__(name)
         self.target = None
@@ -192,6 +196,8 @@ class LookForCoke(py_trees.behaviour.Behaviour):
 
 @behavior
 class Watch(py_trees.behaviour.Behaviour):
+    desc = 'watch target repeatedly to get reliable location data'
+
     def __init__(self, name, node, debug=False):
         super(Watch, self).__init__(name)
         self.target = None

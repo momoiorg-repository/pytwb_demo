@@ -83,7 +83,8 @@ class Messenger:
         
 @behavior
 class Commander(py_trees.behaviour.Behaviour):
-    """ Gets a location name from the queue """
+    desc = 'create vector map and supervise operations'
+    
     def __init__(self, name, node, map_file=None):
         super(Commander, self).__init__(name)
         self.messenger = Messenger(node, map_file)
