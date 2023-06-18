@@ -61,7 +61,9 @@ The screens of Gazebo and Rviz are displayed, so place the coke can anywhere in 
 Then run pytwb_demo docker. All work is done within VSCode, and running pytwb_demo is the same as the standard pytwb procedure. The steps are reproduced below. 
 
 (at "pytwb_demo" directory)  
-Press “F1”  
+start VSCode by "code ."
+Select docker-compose.yaml
+Press “F1” after VSCode starts.  
  -> select “Dev Containers: Open Folder in Container” tab  
  -> select current directory as work directory  
  -> select “From ‘docker-compose.yaml’  
@@ -70,12 +72,15 @@ Set working directory of VSCode by its "Open Folder" menu to “/root/pytwb_wb�
 input “export DISPLAY= xxx.xxx.xxx.xxx:0.0” from the Terminal section of VSCode window.  
 Install VSCode "Python in Dev Container" plugin.  
 Select “main.py” and press F5.  
-The “> “ prompt will be displayed in the Terminal section.   This implies that the pytwb command session has been started successfully.  
+The “> “ prompt will be displayed in the Terminal section.   This implies that the pytwb command session has been started successfully. 
+By inputting “create pytwb_demo” command, The “pytwb_demo” package will be created. 
 
 Execute the following  
 \> run sim
 
-The simulation will now begin.  
+The simulation will now begin.  (Sometimes only the first trial fails
+because of the value of environment variable 'DISPLAY'.
+Please set DISPLAY to the correct value again by using Terminal.) 
 
 [video demo](https://momoi.org/wp-content/uploads/2023/06/demo.mp4)  
 
