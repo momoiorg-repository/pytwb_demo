@@ -1,3 +1,3 @@
 from pytwb.lib_main import initialize, run
-initialize('./pytwb_demo/pytwb_demo')
+initialize('/root/pytwb_demo/pytwb_ws', 'pytwb_demo')
 run('sim')

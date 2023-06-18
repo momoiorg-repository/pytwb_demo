@@ -28,42 +28,30 @@ etc. are realized.
 # Installation
 First, install sea-bass' turtlebot3_behavior_demos. A run of Gazebo and Rviz is provided in "turtlebot3_behavior_demos". 
 
+```
 git clone https://github.com/sea-bass/turtlebot3_behavior_demos.git  
 cd turtlebot3_behavior_demos  
 docker compose build  
-cd ..  
+docker compose up demo-world
+```
+(demo-world starts and no return while it is being executed.)
 
 Please refer to the following for details.  
 https://github.com/sea-bass/turtlebot3_behavior_demos  
 
-Next, build pytwb_demo. As a prerequisite, the docker image of pytwb is required. So, first, do the following:  
+Next, change the model of turtlebot3 that demo-world executes and enable the depth function of Realsense camera.  
 
-git clone https://github.com/momoiorg-repository/pytwb.git  
-cd pytwb  
-docker image build -t pytwb:latest .  
-cd ..  
+Open another bash terminal and input followings.  
 
-After that, create a docker image of pytwb_demo.
-
+```
 git clone https://github.com/momoiorg-repository/pytwb_demo.git  
 cd pytwb_demo  
-docker image build -t pytwb_demo:latest .  
-cd ..  
 
-Now that it's ready to run, run two dockers.  
-cd turtlebot3_behavior_demos  
-docker compose up demo-world  
-
-Here, change the model of turtlebot3 that demo-world executes and enable the depth function of realsense camera.  
-
-open another bash terminal  
-cd pytwb_demo
-docker cp ./model.sdf turtlebot3_behavior_demos-demo-world-1:/opt/ros/humble/share/turtlebot3_gazebo/models/turtlebot3_waffle_pi  
-cd ..
-
-Restart docker of world-demo.  
+docker cp ./model.sdf turtlebot3_behavior_demos-demo-world-1:/opt/ros/humble/share/turtlebot3_gazebo/models/turtlebot3_waffle_pi  # a long line which starts with 'docker ...'
 docker restart turtlebot3_behavior_demos-demo-world-1  
-(change docker name based on your execution environment.)
+```
+
+(change the docker name based on your execution environment.)
 
 The screens of Gazebo and Rviz are displayed, so place the coke can anywhere in the house from the "Insert" tab of Gazebo.  Pull down "http://models.gazebosim.org/" tab of Insert and pick up and place "coke can".
 
@@ -71,18 +59,32 @@ The screens of Gazebo and Rviz are displayed, so place the coke can anywhere in 
 
  It doesn't matter if you put more than one.
 
-Then run pytwb_demo docker  
+Then run pytwb_demo docker. All work is done within VSCode, and running pytwb_demo is the same as the standard pytwb procedure. The steps are reproduced below. 
 
-docker run -–name \<docker name\> --network host -it pytwb_demo  
+(at "pytwb_demo" directory)  
+start VSCode by "code ."
+Select docker-compose.yaml
+Press “F1” after VSCode starts.  
+ -> select “Dev Containers: Open Folder in Container” tab  
+ -> select current directory as work directory  
+ -> select “From ‘docker-compose.yaml’  
+The corresponding docker will be started and VSCode is attached automatically.  
+Set working directory of VSCode by its "Open Folder" menu to “/root/pytwb_wb”.  
+input “export DISPLAY= xxx.xxx.xxx.xxx:0.0” from the Terminal section of VSCode window.  
+Install VSCode "Python in Dev Container" plugin.  
+Select “main.py” and press F5.  
+The “> “ prompt will be displayed in the Terminal section.   This implies that the pytwb command session has been started successfully. 
+By inputting “create pytwb_demo” command, The “pytwb_demo” package will be created. 
 
-In VSCode, attach to \<docker name\> and set the work directory to /root.  
-Execute ./src/pytwb_demo/pytwb_demo/dbg_main.py from VSCode.
-
-The "> " prompt is displayed in Terminal window of VSCode, so execute the following  
+Execute the following  
 \> run sim
 
-The simulation will now begin.  
+The simulation will now begin.  (Sometimes only the first trial fails
+because of the value of environment variable 'DISPLAY'.
+Please set DISPLAY to the correct value again by using Terminal.) 
+
 [video demo](https://momoi.org/wp-content/uploads/2023/06/demo.mp4)  
+
 The robot begins searching, finds a coke can in the process, calculates coordinates, and moves closer to it.  It terminates with displaying "mission complete".
 
 ![execution of behavior tree](resource/prog.jpg)
