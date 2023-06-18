@@ -12,7 +12,8 @@ from pytwb.common import behavior
 #
 @behavior
 class GetLocation(py_trees.behaviour.Behaviour):
-    """ Gets a location name from the queue """
+    desc = 'Gets a location pose from the pose list'
+
     def __init__(self, name):
         super(GetLocation, self).__init__(name)
         self.bb = py_trees.blackboard.Blackboard()
@@ -101,6 +102,8 @@ class MoveWorker:
 
 @behavior
 class GoToPose(py_trees.behaviour.Behaviour):
+    desc = 'actual move action'
+    
     def __init__(self, name, node):
         super(GoToPose, self).__init__(name)
         self.node = node

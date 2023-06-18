@@ -12,7 +12,8 @@ from lib.geolib import get_pose, get_approach_pose
 # location list for error recovery
 @behavior
 class SetWatchLocations(py_trees.behaviour.Behaviour):
-    """ Gets a location name from the queue """
+    desc = 'schedule robot pose to take when a target object(coke) is found'
+
     def __init__(self, name, debug=False):
         super(SetWatchLocations, self).__init__(name)
         self.debug = debug
@@ -72,7 +73,8 @@ class SetWatchLocations(py_trees.behaviour.Behaviour):
 ## derived from "turtlebot3_behavior_demo"
 @behavior
 class GetWatchLocation(py_trees.behaviour.Behaviour):
-    """ Gets a location name from the queue """
+    desc = 'decide location to visit for recovery when watching fails'
+
     def __init__(self, name):
         super(GetWatchLocation, self).__init__(name)
         self.bb = py_trees.blackboard.Blackboard()
@@ -91,7 +93,8 @@ class GetWatchLocation(py_trees.behaviour.Behaviour):
 
 @behavior
 class GetGlancedLocation(py_trees.behaviour.Behaviour):
-    """ Gets a location name from the queue """
+    desc = 'calculate pose when a coke can is found while moving'
+
     def __init__(self, name):
         super(GetGlancedLocation, self).__init__(name)
         bb = py_trees.blackboard.Blackboard()
@@ -124,6 +127,8 @@ class GetGlancedLocation(py_trees.behaviour.Behaviour):
 
 @behavior
 class ScheduleDestination(py_trees.behaviour.Behaviour):
+    desc = 'decide target pose based on coke can location'
+    
     def __init__(self, name):
         super(ScheduleDestination, self).__init__(name)
         self.bb = py_trees.blackboard.Blackboard()

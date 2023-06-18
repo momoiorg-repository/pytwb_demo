@@ -7,7 +7,8 @@ from pytwb.common import behavior
 #
 @behavior
 class SetLocations(py_trees.behaviour.Behaviour):
-    """ Gets a location name from the queue """
+    desc = 'create candidates of visit locations by vector map'
+    
     def __init__(self, name):
         super(SetLocations, self).__init__(name)
     
