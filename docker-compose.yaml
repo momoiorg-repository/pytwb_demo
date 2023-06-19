@@ -9,7 +9,7 @@ services:
     network_mode: host
     ipc: host
     environment:
-      - DISPLAY=:0 # for WSL
+      - DISPLAY=:$DISPLAY # for WSL
     volumes:
       - ./pytwb_ws/src/pytwb_demo:/root/pytwb_wb/src/pytwb_demo:rw
     command: sleep infinity
