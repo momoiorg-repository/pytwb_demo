@@ -19,5 +19,5 @@ RUN pip3 install -e .
 
 WORKDIR /root
 RUN mkdir pytwb_ws
-COPY ./pytwb_ws ./pytwb_ws
+# COPY ./pytwb_ws ./pytwb_ws
 RUN echo "source /opt/ros/humble/setup.bash" >> .bashrc

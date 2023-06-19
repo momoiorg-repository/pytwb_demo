@@ -3,14 +3,14 @@ services:
     image: pytwb-demo-image
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: pytwb_ws/Dockerfile
       args:
         ROS_DISTRO: humble
     network_mode: host
     ipc: host
     environment:
-      - DISPLAY=:$DISPLAY # for WSL
+      - DISPLAY=:${DISPLAY} # for VSCode config
     volumes:
-      - ./pytwb_ws/src/pytwb_demo:/root/pytwb_wb/src/pytwb_demo:rw
+      - ./pytwb_ws:/root/pytwb_ws:rw
     command: sleep infinity
 
