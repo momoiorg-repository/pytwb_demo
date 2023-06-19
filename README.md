@@ -70,7 +70,6 @@ Press “F1” after VSCode starts.
 The corresponding docker will be started and VSCode is attached automatically.  
 Set working directory of VSCode by its "Open Folder" menu to “/root/pytwb_wb” (1st time only. Automatically set after creating a package).  
 Install VSCode "Python in Dev Container" plugin(1st time only).  
-input “export DISPLAY= xxx.xxx.xxx.xxx:0.0” from the Terminal section of VSCode window.  
 Select “main.py” and press F5.  
 The “> “ prompt will be displayed in the Terminal section.   This implies that the pytwb command session has been started successfully. 
 By inputting “create pytwb_demo” command, The “pytwb_demo” package will be created. 
@@ -78,9 +77,9 @@ By inputting “create pytwb_demo” command, The “pytwb_demo” package will 
 Execute the following  
 \> run sim
 
-The simulation will now begin.  (Sometimes only the first trial fails
-because of the value of environment variable 'DISPLAY'.
-Please set DISPLAY to the correct value again by using Terminal.) 
+The simulation will now begin.  (Sometimes only the first trial fails because of the value of environment variable 'DISPLAY'.
+Its value depends on how many windows you have open.
+Please set DISPLAY to the correct value by using VSCode Terminal.) 
 
 [video demo](https://momoi.org/wp-content/uploads/2023/06/demo.mp4)  
 
