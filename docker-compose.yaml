@@ -1,5 +1,5 @@
 services:
-  pytwb:
+  pytwb-demo:
     image: pytwb-demo-image
     build:
       context: .
@@ -13,4 +13,3 @@ services:
     volumes:
       - ./pytwb_ws:/root/pytwb_ws:rw
     command: sleep infinity
-
