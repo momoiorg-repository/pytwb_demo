@@ -75,12 +75,15 @@ The “> “ prompt will be displayed in the Terminal section.  (Sometimes only 
 Its value depends on how many windows you have open.
 Please set DISPLAY to the correct value by using VSCode Terminal.)  
 Display of prompt implies that the pytwb command session has been started successfully. 
-By inputting “create pytwb_demo” command, the “pytwb_demo” package will be created. 
+By inputting
+\> create pytwb_demo
 
-Execute the following  
+command, the “pytwb_demo” package will be created. 
+
+And execute the following  
 \> run sim
 
-The simulation will now begin.   
+The simulation will begin.   
 
 [video demo](https://momoi.org/wp-content/uploads/2023/06/demo.mp4)  
 
